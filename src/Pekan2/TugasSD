@@ -1,7 +1,9 @@
 package pekan2;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 
+// Kelas Mobil
 class Mobil {
     String platNomor;
 
@@ -14,6 +16,7 @@ class Mobil {
     }
 }
 
+// Kelas Parkiran
 class Parkiran {
     ArrayList<Mobil> daftarMobil = new ArrayList<>();
 
@@ -55,11 +58,13 @@ class Parkiran {
     }
 }
 
+// Kelas Utama
 public class ParkiranMobil {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         Parkiran parkiran = new Parkiran();
 
+        // Menambahkan mobil awal
         String[] platAwal = {"BA1111AA", "BA2222BB", "BA3333CC", "BA4444DD", "BA5555EE", "BA6666FF", "BA7777GG"};
         for (String plat : platAwal) {
             parkiran.tambahMobil(plat);
@@ -74,33 +79,35 @@ public class ParkiranMobil {
             System.out.println("4. Cari mobil di Parkiran");
             System.out.println("5. Keluar");
             System.out.print("Pilih Opsi: ");
+
+            while (!scanner.hasNextInt()) {
+                System.out.println("Input tidak valid! Masukkan angka antara 1 - 5.");
+                scanner.next(); // Buang input yang salah
+                System.out.print("Pilih Opsi: ");
+            }
+
             pilihan = scanner.nextInt();
-            scanner.nextLine();
+            scanner.nextLine(); // Hapus newline
 
             switch (pilihan) {
-                case 1:
+                case 1 -> {
                     System.out.print("Masukkan plat nomor: ");
                     String platTambah = scanner.nextLine();
                     parkiran.tambahMobil(platTambah);
-                    break;
-                case 2:
+                }
+                case 2 -> {
                     System.out.print("Masukkan plat nomor yang akan dikeluarkan: ");
                     String platKeluar = scanner.nextLine();
                     parkiran.keluarkanMobil(platKeluar);
-                    break;
-                case 3:
-                    parkiran.tampilkanParkiran();
-                    break;
-                case 4:
+                }
+                case 3 -> parkiran.tampilkanParkiran();
+                case 4 -> {
                     System.out.print("Masukkan plat nomor yang dicari: ");
                     String platCari = scanner.nextLine();
                     parkiran.cariMobil(platCari);
-                    break;
-                case 5:
-                    System.out.println("Terima kasih telah menggunakan program parkiran.");
-                    break;
-                default:
-                    System.out.println("Opsi tidak valid. Coba lagi.");
+                }
+                case 5 -> System.out.println("Terima kasih telah menggunakan program parkiran.");
+                default -> System.out.println("Opsi tidak valid. Coba lagi.");
             }
         } while (pilihan != 5);
 
